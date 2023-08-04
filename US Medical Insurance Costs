@@ -1,0 +1,92 @@
+import csv
+
+from collections import Counter
+
+
+
+list_of_ages = []
+
+Counter(list_of_ages)
+
+list_of_sex = []
+
+Counter(list_of_sex)
+
+
+list_of_bmi = []
+
+list_of_children = []
+
+
+
+list_of_smoker = []
+
+print(list_of_smoker)
+
+#Counter(list_of_smoker)
+
+
+
+list_of_region = []
+
+Counter(list_of_region)
+
+list_of_charges = []
+
+print(list_of_charges)
+
+with open('insurance.csv',newline='') as insurance_csv_file:
+    insurance_csv_file = csv.DictReader(insurance_csv_file)
+    for row in insurance_csv_file:
+        list_of_ages.append(int(row['age']))
+        list_of_sex.append(row['sex'])
+        list_of_bmi.append(int(float(row['bmi'])))
+        list_of_children.append(int(row['children']))
+        list_of_smoker.append(row['smoker'])
+        list_of_region.append(row['region'])
+        list_of_charges.append(int(float(row['charges'])))
+        print(row['age'], row['sex'], row['bmi'], row['children'], row['smoker'], row['region'], row['charges'])
+
+def Average(list):
+    sum_of_list = 0
+    for i in range(len(list)):
+        sum_of_list += list[i]
+    average = sum_of_list/len(list)
+    return average
+
+average_age = Average(list_of_ages)
+print("Average age from the data is =", round(average_age, 0))
+
+average_bmi = Average(list_of_bmi)
+print("Average bmi from the data is =", round(average_bmi, 2))
+
+average_children = Average(list_of_children)
+print("Average amount of children from the data is =", round(average_children, 0))
+
+average_charges = Average(list_of_charges)
+print("Average amount of charges is =", round(average_charges, 2))
+
+average_categories = []
+
+average_categories.append('average_age')
+average_categories.append('average_bmi')
+average_categories.append('average_children')
+average_categories.append('average_charges')
+
+average_values = []
+
+average_values.append(39.0)
+average_values.append(30.17)
+average_values.append(1.0)
+average_values.append(13269.93)
+
+zipped_categories_values = zip(average_categories, average_values)
+
+insurance_csv_category_averages = {key:value for key, value in zip(average_categories, average_values)}
+print(insurance_csv_category_averages)
+
+
+
+smokers_nonsmokers_charges = zip(list_of_charges, list_of_smoker)
+
+print(dict(smokers_nonsmokers_charges))
