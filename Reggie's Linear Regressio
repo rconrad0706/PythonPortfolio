@@ -1,0 +1,48 @@
+def get_y(m, b, x):
+    y = m*x + b
+    return y
+
+(get_y(1, 0, 7) == 7)
+(get_y(5, 10, 3) == 25)
+
+def calculate_error(m, b, point):
+    x_point = x_value
+    y_point = y_value
+    y = m*x + b
+    distance = abs(y - y_point)
+    return distance
+#print(calculate_error)
+
+points = [(1, 2), (2, 0), (3, 4), (4, 4), (5, 3)]
+
+def calculate_all_error(m, b, point):
+    total_error = 0
+    for point in points:
+        total_error += calculate_error(m, b, point)
+    return total_error
+#print(calculate_all_error)   
+
+possible_ms = [i/10-20 for i in range(201)]
+
+possible_bs = [i/20-20 for i in range(401)]
+
+datapoints = [(1, 2), (2, 0), (3, 4), (4, 4), (5, 3)]
+smallest_error = float("inf")
+best_m = 0
+best_b = 0
+for m in possible_ms:
+    for b in possible_bs:
+        error = calculate_all_error(m, b, datapoints)
+        if error < smallest_error:
+            best_m = m
+            best_b = b
+            smallest_error = error
+print(best_m, best_b, smallest_error)
+
+y = 0.3x + 1.7
+
+print(get_y(0.3, 1.7, 6))
+
+def get_bounce_height(x):
+    return get_y(0.3, 1.7, x)
+print(get_bounce_height(6))
